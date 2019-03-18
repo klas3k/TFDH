@@ -2,12 +2,19 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>&#128293 ASF</title>
+        {% block stylesheets %}
+        <link type="text/css" href="{{ asset('assets/dist/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link type="text/css" href="{{ asset('assets/src/css/index.css') }}" rel="stylesheet">
+        {% endblock %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block body %}
+            {% block nav %}{% endblock %}
+            {% block content %}{% endblock %}
+        {% endblock %}
+        {% block javascripts %}
+        {% endblock %}
     </body>
 </html>
