@@ -20,3 +20,9 @@ body {
   background-image: url('../../images/thai-kickboxing-wallpapers-5bc9a76fd1a3b.jpg');
   background-size: cover;
 }
+
+.btn {
+  color: #212529;
+  background-color: #ffc107;
+  border-color: #ffc107;
+}

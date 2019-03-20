@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+
+{% block stylesheets %}
+    {{ parent() }}
+    <!-- Potato -->
+    <link type="text/css" href="{{ asset('assets/src/css/forms.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block nav %}
+    {% include 'includes/navBar.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-sm-6 loginForm">
+            {{ form_widget(form) }}
+        </div>
+        <div class="col-sm-6 registerForm">
+            <p>Register en wel nu!</p>
+            <a class="btn btn-warning" href="{{ path('register') }}">Aanmelden</a>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,8 @@
+body>div.container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.loginForm {
+    border-right: 1px solid black;
+}
