@@ -22,16 +22,7 @@ class AppFixtures extends Fixture
         for($i = 0; $i < 5; $i++) {
             $instructor = new Instructor();
             // Person values
-            $instructor->setPerson([
-                "username"    => $faker->userName,
-                "password"    => $faker->password,
-                "firstName"   => $faker->firstName,
-                "prefix"      => $faker->randomElement([null, "van", "van der", "de", "van den"]),
-                "lastName"    => $faker->lastName,
-                "dateOfBirth" => $faker->dateTime("now"),
-                "gender"      => $faker->randomElement(["male", "female"]),
-                "email"       => $faker->email,
-            ]);
+            $instructor->setPerson($this->getPersonValues($faker));
             // Instructor values
             $instructor->setHiringDate($faker->dateTime("now"));
             $instructor->setSalary($faker->numberBetween(1000, 3000));
@@ -44,16 +35,7 @@ class AppFixtures extends Fixture
         for($i = 0; $i < 20; $i++) {
             $member = new Member();
             // Person values
-            $member->setPerson([
-                "username"    => $faker->userName,
-                "password"    => $faker->password,
-                "firstName"   => $faker->firstName,
-                "prefix"      => $faker->randomElement([null, "van", "van der", "de", "van den"]),
-                "lastName"    => $faker->lastName,
-                "dateOfBirth" => $faker->dateTime("now"),
-                "gender"      => $faker->randomElement(["male", "female"]),
-                "email"       => $faker->email,
-            ]);
+            $member->setPerson($this->getPersonValues($faker));
             // Member values
             $member->setStreet($faker->streetName);
             $member->setPostalCode($faker->postcode);
@@ -106,5 +88,26 @@ class AppFixtures extends Fixture
         }
 
         $manager->flush();
+    }
+
+    /**
+     * Returns randomized person values
+     * 
+     * @param Factory $faker
+     * 
+     * @return array
+     */
+    private function getPersonValues($faker)
+    {
+        return [
+            "username"    => $faker->userName,
+            "password"    => $faker->password,
+            "firstName"   => $faker->firstName,
+            "prefix"      => $faker->randomElement([null, "van", "van der", "de", "van den"]),
+            "lastName"    => $faker->lastName,
+            "dateOfBirth" => $faker->dateTime("now"),
+            "gender"      => $faker->randomElement(["male", "female"]),
+            "email"       => $faker->email,
+        ];
     }
 }
