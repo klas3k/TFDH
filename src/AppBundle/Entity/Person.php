@@ -91,6 +91,27 @@ class Person
     }
 
     /**
+     * Set all person values
+     * 
+     * @param array $values
+     * 
+     * @return Person
+     */
+    public function setPerson($values)
+    {
+        $this->username = $values["username"];
+        $this->password = $values["password"];
+        $this->firstName = $values["firstName"];
+        $this->prefix = $values["prefix"];
+        $this->lastName = $values["lastName"];
+        $this->dateOfBirth = $values["dateOfBirth"];
+        $this->gender = $values["gender"];
+        $this->email = $values["email"];
+
+        return $this;
+    }
+
+    /**
      * Set username
      *
      * @param string $username

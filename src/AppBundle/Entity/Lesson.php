@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Lesson
@@ -143,6 +144,64 @@ class Lesson
     public function getMaxPeople()
     {
         return $this->maxPeople;
+    }
+
+    /**
+     * Get the value of training
+     * 
+     * @return int
+     */ 
+    public function getTraining()
+    {
+        return $this->training;
+    }
+
+    /**
+     * Set the value of training
+     * 
+     * @param integer $training
+     *
+     * @return Lesson
+     */ 
+    public function setTraining($training)
+    {
+        $this->training = $training;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of instructor
+     * 
+     * @return int
+     */ 
+    public function getInstructor()
+    {
+        return $this->instructor;
+    }
+
+    /**
+     * Set the value of instructor
+     *
+     * @param integer $instructor
+     * 
+     * @return Lesson
+     */ 
+    public function setInstructor($instructor)
+    {
+        $this->instructor = $instructor;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of registrations
+     * 
+     * @return int
+     */ 
+    public function getRegistrations()
+    {
+        return $this->registrations;
     }
 }
 

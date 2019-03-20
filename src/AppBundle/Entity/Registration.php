@@ -74,5 +74,53 @@ class Registration
     {
         return $this->payment;
     }
+
+    /**
+     * Get the value of lesson
+     * 
+     * @return int
+     */ 
+    public function getLesson()
+    {
+        return $this->lesson;
+    }
+
+    /**
+     * Set the value of lesson
+     * 
+     * @param integer $lesson
+     *
+     * @return Registration
+     */ 
+    public function setLesson($lesson)
+    {
+        $this->lesson = $lesson;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of member
+     * 
+     * @return int
+     */ 
+    public function getMember()
+    {
+        return $this->member;
+    }
+
+    /**
+     * Set the value of member
+     *
+     * @param integer $member
+     * 
+     * @return Registration
+     */ 
+    public function setMember($member)
+    {
+        $this->member = $member;
+
+        return $this;
+    }
 }
 

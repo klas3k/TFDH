@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Person;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Instructor
