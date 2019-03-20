@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    {% block nav %}
+        {% include 'includes/navBar.html.twig' %}
+    {% endblock %}
+    {% block sideNav %}
+        {% include 'includes/navBar.html.twig' %}
+    {% endblock %}
+    <div class="container">
+        <h1>Geen content voor jou</h1>
+        {% block content %}
+        {% endblock %}
+    </div>
+    {% block footer %}
+        <footer class="py-5 bg-dark">
+            <div class="container">
+                <p class="m-0 text-center text-warning">Copyright &copy; Training Factory Den Haag 2019</p>
+            </div>
+        </footer>
+    {% endblock %}
+{% endblock %}
