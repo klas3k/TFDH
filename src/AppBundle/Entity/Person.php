@@ -302,5 +302,13 @@ class Person
     {
         return $this->email;
     }
+
+    public function __toString()
+    {
+        $firstName = $this->getFirstName();
+        $prefix = $this->getPrefix();
+        $lastName = $this->getLastName();
+        return $prefix ? "$firstName $prefix $lastName" : "$firstName $lastName";
+    }
 }
 

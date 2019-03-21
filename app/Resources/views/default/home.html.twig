@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+	<div class="row homeImageWrapper">
+		<img src="https://i.ytimg.com/vi/SBOg56KHa7E/maxresdefault.jpg" class="col-4"/>
+		<img src="https://asset-sports.abs-cbn.com/web/dev/articles/1547971796_ap19020222677351.jpg" class="col-4"/>
+		<img src="https://i.ytimg.com/vi/AvKf7C6KJj0/maxresdefault.jpg" class="col-4"/>
+	</div>
+	<div class="container flexAll homeContainer">
+		<h4>Welkom bij Training Factory Den Haag</h4>
+		<p>
+			Den Haag Training Center is een sportschool waar onder professionele begeleiding
+			in een veilige omgeving verschillende soorten martial arts-, indoor bootcamp, personal-
+			en small group trainingen worden aangeboden. Hier kan je je inschrijven op een les of uitschrijven op een les.
+		</p>
+	</div>
+{% endblock %}
+{% block stylesheets %}
+	{{ parent() }}
+	<style>
+		.homeImageWrapper {
+			height: 200px;
+		}
+
+		.homeImageWrapper > img {
+			height: 100%;
+		}
+
+		.homeContainer {
+			flex-direction: column;
+			width: 75%;
+			padding-top: 25px;
+			text-align: center;
+		}
+	</style>
+{% endblock %}

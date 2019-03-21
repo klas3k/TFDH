@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+	<div class="card-columns">
+		{% for training in trainings %}
+			<div class="card">
+				<h5 class="card-header">{{ training.name }}</h5>
+				<div class="card-body">
+					<p class="card-text">{{ training.description }}</p>
+					<a href="#" class="btn btn-primary">Bekijk lessen</a>
+				</div>
+				<div class="card-footer">
+					<a href="{{ path('training_update', {'name': training}) }}" class="btn btn-success">Edit</a>
+					<a href="{{ path('training_delete', {'name': training}) }}" class="btn btn-danger">Delete</a>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

@@ -30,7 +30,14 @@ class Training
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255)
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+    
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text")
      */
     private $description;
 
@@ -44,9 +51,9 @@ class Training
     /**
      * @var int
      *
-     * @ORM\Column(name="costs", type="integer", nullable=true)
+     * @ORM\Column(name="extra_costs", type="integer", nullable=true)
      */
-    private $costs;
+    private $extraCosts;
 
     public function __construct() {
         $this->lessons = new ArrayCollection();
@@ -60,6 +67,30 @@ class Training
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     *
+     * @return Training
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -111,27 +142,32 @@ class Training
     }
 
     /**
-     * Set costs
+     * Set extraCosts
      *
-     * @param integer $costs
+     * @param integer $extraCosts
      *
      * @return Training
      */
-    public function setCosts($costs)
+    public function setExtraCosts($extraCosts)
     {
-        $this->costs = $costs;
+        $this->extraCosts = $extraCosts;
 
         return $this;
     }
 
     /**
-     * Get costs
+     * Get extraCosts
      *
      * @return int
      */
-    public function getCosts()
+    public function getExtraCosts()
     {
-        return $this->costs;
+        return $this->extraCosts;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
 
