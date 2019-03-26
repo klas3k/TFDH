@@ -41,13 +41,13 @@ class TrainingController extends Controller
             $em->persist($training);
             $em->flush();
 
-            $this->addFlash('success', 'Training aangemaakt!');
+            $this->addFlash("success", "Training aangemaakt!");
 
             return $this->redirectToRoute("homepage", $request->query->all());
         }
 
         return $this->render("default/form.html.twig", [
-            "name" => "John Doe",
+            "name"   => "John Doe",
             "form"   => $form->createView(),
         ]);
     }
@@ -66,13 +66,13 @@ class TrainingController extends Controller
             $em->persist($training);
             $em->flush();
 
-            $this->addFlash('success', 'Training bewerkt!');
+            $this->addFlash("success", "Training bewerkt!");
 
             return $this->redirectToRoute("training_index", $request->query->all());
         }
 
         return $this->render("default/form.html.twig", [
-            "name" => "John Doe",
+            "name"   => "John Doe",
             "form"   => $form->createView(),
         ]);
     }
@@ -86,7 +86,7 @@ class TrainingController extends Controller
         $em->remove($training);
         $em->flush();
 
-        $this->addFlash('success', 'Training verwijdert!');
+        $this->addFlash("success", "Training verwijdert!");
 
         return $this->redirectToRoute("training_index", $request->query->all());
     }
