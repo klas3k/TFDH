@@ -11,10 +11,12 @@
     <body>
         <header class="row">
             <div class="col-2 d-flex justify-content-center align-items-center">
-                <img class="w-100" src="{{ asset('images/tfdh_logo.png') }}">
+                 <a class="nav-link" href="{{ path('homepage') }}">
+                    <img class="w-100" src="{{ asset('images/tfdh_logo.png') }}">
+                 </a>
             </div>
             <h1 class="col-8 d-flex justify-content-center align-items-center">Training Factory Den Haag</h1>
-            <div class="col-2 d-flex justify-content-evenly align-items-center flex-column">
+            <div class="col-2 d-flex justify-content-around align-items-center flex-column">
                 {{ name }}
                 <button class="btn btn-outline-primary">Uitloggen</button>
             </div>

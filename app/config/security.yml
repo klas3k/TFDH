@@ -2,23 +2,33 @@
 # https://symfony.com/doc/current/security.html
 security:
 
-    # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    encoders:
+        AppBundle\Entity\Person:
+            algorithm: bcrypt
+            cost: 12
+
     providers:
         in_memory:
-            memory: ~
+            memory:
+                users:
+                    ryan:
+                        password: $2y$12$Pgx0sXmjyc4fKjuNJkDyde5Llc47.gHshRAhSNPRg3qauzRcOXNTW
+                        roles: 'ROLE_MEMBER'
+                    admin:
+                        password: $2y$12$8wsD2fs.Lff3AXtcITHsre4UCHZCZIxrBau5aBlDZuvTum4RfikYC
+                        roles: 'ROLE_INSTRUCTOR'
 
     firewalls:
-        # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
         main:
             anonymous: ~
-            # activate different ways to authenticate
+            http_basic: ~
+            logout:
+                path:   /logout
+                target: /
 
-            # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
-            #http_basic: ~
-
-            # https://symfony.com/doc/current/security/form_login_setup.html
-            #form_login: ~
+    access_control:
+        - { path: ^/instructor, roles: ROLE_INSTRUCTOR }

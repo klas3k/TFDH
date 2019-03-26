@@ -8,8 +8,18 @@ use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Form\LessonType;
 use AppBundle\Entity\Lesson;
 
+use Symfony\Component\HttpFoundation\Response;
+
 class DefaultController extends Controller
 {
+    /**
+     * @Route("/instructor", name="instructor")
+     */
+    public function instructorAction(Request $request)
+    {
+        return new Response("<html><body>instructor</body></html>");
+    }
+
     /**
      * @Route("/", name="homepage")
      */
