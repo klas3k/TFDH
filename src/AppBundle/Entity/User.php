@@ -32,7 +32,7 @@ Abstract class User
     /**
      * @ORM\Column(type="string")
      */
-    private $emaill;
+    private $email;
 
     /**
      * @ORM\Column(type="string")

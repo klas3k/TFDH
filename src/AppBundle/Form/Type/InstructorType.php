@@ -17,7 +17,8 @@ class InstructorType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'readOnly' => false
+            'readOnly' => false,
+            'data_class' => 'AppBundle\Entity\Instructor',
         ));
     }
 

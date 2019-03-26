@@ -8,6 +8,7 @@ use AppBundle\Form\Type\MemberType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class QuestController extends Controller
 {
@@ -48,12 +49,19 @@ class QuestController extends Controller
     /**
      * @Route("/login", name="login")
      */
-    public function loginAction(Request $request)
+    public function loginAction(AuthenticationUtils $authenticationUtils)
     {
-        $form = $this->createForm(LogInType::class);
+        // get the login error if there is one
+        $error = $authenticationUtils->getLastAuthenticationError();
+
+        // last username entered by the user
+        $lastUsername = $authenticationUtils->getLastUsername();
+
+        dump($error);
 
         return $this->render('guest/login.html.twig', [
-            'form' => $form->createView(),
+            'last_username' => $lastUsername,
+            'error'         => $error,
         ]);
     }
 }

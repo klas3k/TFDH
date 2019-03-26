@@ -12,6 +12,16 @@ class AdminController extends Controller
     /**
      * @Route("/admin", name="admin-dashboard")
      */
+    public function adminDashboardAction(Request $request)
+    {
+        return $this->render('admin/adminBase.html.twig', [
+            'user' => $this->getUser(),
+        ]);
+    }
+
+    /**
+     * @Route("/admin/login", name="admin-dashboard")
+     */
     public function showLessonsAction(Request $request)
     {
         return $this->render('admin/adminBase.html.twig', [

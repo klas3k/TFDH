@@ -11,7 +11,9 @@
         <h1 class="display-3">Training Factory Den Haag</h1>
         <p class="lead">Training Factory Den Haag is een sportschool waar onder professionele begeleiding in een veilige omgeving verschillende soorten martial arts-, indoor bootcamp, personal- en small group trainingen worden aangebode.  Hier kan je je inschrijven op een les of uitschrijven op een les.</p>
         {% if user is defined and user is not null %}
-            <p>Welkom! {{ user.prefix }}. {{ user.lastname }}</p>
+            <p>Welkom!
+                {#{{ user.prefix }}. {{ user.lastname }}#}
+            </p>
         {% else %}
             <a href="{{ path('register') }}" class="btn btn-warning btn-lg">Aanmelden</a>
             <a href="{{ path('login') }}" class="btn btn-warning btn-lg">Log in</a>

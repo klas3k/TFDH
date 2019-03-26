@@ -13,8 +13,21 @@
 
 {% block content %}
     <div class="row">
+        {% if error %}
+            <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+        {% endif %}
+    </div>
+    <div class="row">
         <div class="col-sm-6 loginForm">
-            {{ form_widget(form) }}
+            <form action="{{ path('login') }}" method="post">
+                <label for="username">Username:</label>
+                <input class="form-control" type="text" id="username" name="_username" value="{{ last_username }}"/>
+
+                <label for="password">Password:</label>
+                <input class="form-control" type="password" id="password" name="_password"/>
+
+                <button class="btn btn-warning" type="submit" style="margin-top: 10px">login</button>
+            </form>
         </div>
         <div class="col-sm-6 registerForm">
             <p>Register en wel nu!</p>
