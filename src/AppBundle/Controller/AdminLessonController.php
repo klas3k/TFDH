@@ -1,22 +1,22 @@
 <?php
 
-namespace AppBundle\Controller\Admin\Controllers;
+namespace AppBundle\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class LessonController extends Controller
+class AdminLessonController extends Controller
 {
     public function __construct()
     {
     }
 
     /**
-     * @Route("/admin/training/list", name="training-list")
+     * @Route("/admin/lesson/list", name="lesson-list")
      */
-    public function showTrainingsAction(Request $request)
+    public function showLessonsAction(Request $request)
     {
         return $this->render('default/index.html.twig', [
             'user' => $this->getUser(),
@@ -24,9 +24,9 @@ class LessonController extends Controller
     }
 
     /**
-     * @Route("/admin/training/create", name="training-create")
+     * @Route("/admin/lesson/create", name="lesson-create")
      */
-    public function createTrainingAction(Request $request)
+    public function createLessonAction(Request $request)
     {
         return $this->render('default/index.html.twig', [
             'user' => $this->getUser(),

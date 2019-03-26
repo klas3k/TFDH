@@ -1,22 +1,22 @@
 <?php
 
-namespace AppBundle\Controller\Admin\Controllers;
+namespace AppBundle\Controller;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class MemberController extends Controller
+class AdminMemberController extends Controller
 {
     public function __construct()
     {
     }
 
     /**
-     * @Route("/admin/training/list", name="training-list")
+     * @Route("/admin/member/list", name="member-list")
      */
-    public function showTrainingsAction(Request $request)
+    public function showMembersAction(Request $request)
     {
         return $this->render('default/index.html.twig', [
             'user' => $this->getUser(),
@@ -24,9 +24,9 @@ class MemberController extends Controller
     }
 
     /**
-     * @Route("/admin/training/create", name="training-create")
+     * @Route("/admin/member/create", name="member-create")
      */
-    public function createTrainingAction(Request $request)
+    public function createMemberAction(Request $request)
     {
         return $this->render('default/index.html.twig', [
             'user' => $this->getUser(),

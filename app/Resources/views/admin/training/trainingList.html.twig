@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block nav %}
+    {% include 'includes/navBar.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <a class="btn btn-warning" href="{{ path('training-create') }}">Nieuwe training</a>
+    <div style="margin-top: 10px    ">
+        <table class="table table-bordered">
+            <thead>
+                <td>Id</td>
+                <td>Naam</td>
+                <td>Omschrijving</td>
+                <td>Tijd</td>
+                <td>Kosten</td>
+                <td>Acties</td>
+            </thead>
+            <tbody>
+                {% for training in trainings %}
+                    <tr>
+                        <td><a href="{{ path('training-view', {'id':training.id}) }}">{{ training.id }}</a></td>
+                        <td>{{ training.name }}</td>
+                        <td>{{ training.description }}</td>
+                        <td>{{ training.duration }}</td>
+                        <td>{{ training.costs }}</td>
+                        <td>
+                            <div class="btn-group mr-2" role="group" aria-label="First group">
+                                <a href="{{ path('training-edit', {'id':training.id}) }}" class="btn btn-secondary">Bewerken</a>
+                                <a href="#" class="btn btn-secondary">Verwijderen (Niet werkend)</a>
+                            </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
