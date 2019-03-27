@@ -1,10 +1,11 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\Admin;
 
 
 use AppBundle\Form\Processor\InstructorProcessor;
 use AppBundle\Form\Type\InstructorType;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -20,6 +21,7 @@ class AdminInstructorController extends Controller
 
     /**
      * @Route("/admin/instructor/list", name="training-list")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function showInstructorsAction(Request $request)
     {
@@ -30,6 +32,7 @@ class AdminInstructorController extends Controller
 
     /**
      * @Route("/admin/instructor/create", name="training-create")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function createInstructorAction(Request $request)
     {
@@ -47,6 +50,7 @@ class AdminInstructorController extends Controller
 
     /**
      * @Route("/admin/instructor/edit/{id}", name="training-edit")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function editInstructorAction($id, Request $request)
     {
@@ -66,6 +70,7 @@ class AdminInstructorController extends Controller
 
     /**
      * @Route("/admin/instructor/view", name="training-view")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function viewInstructorAction(Request $request)
     {

@@ -7,18 +7,46 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="#">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Contact</a>
-                    </li>
+                    {% if app.user %}
+                        {%  if 'ROLE_ADMIN' in app.user.roles %}
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{{ path('lesson-list') }}">Lesson</a>
+                            </li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{{ path('training-list') }}">Training</a>
+                            </li>
+                            {%  if app.user %}
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="/TFDH/web/app_dev.php/admin/logout">Admin Logout</a>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                        {%  if 'ROLE_INSTRUCTOR' in app.user.roles %}
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Home (Instructor)</a>
+                            </li>
+                        {% endif %}
+                        {%  if 'ROLE_USER' in app.user.roles %}
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Home (User)</a>
+                            </li>
+                            {%  if app.user %}
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="/TFDH/web/app_dev.php/logout">Logout</a>
+                                </li>
+                            {% endif %}
+                        {% endif %}
+                    {% else %}
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Training</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ path('register') }}">Sign up</a>
+                        </li>
+                        <li class="nav-item active">
+                            <a class="nav-link" href="{{ path('login') }}">Login</a>
+                        </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>

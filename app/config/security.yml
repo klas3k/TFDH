@@ -4,34 +4,45 @@ security:
 
     encoders:
         Symfony\Component\Security\Core\User\User: plaintext
-#        AppBundle\Entity\User: plaintext
+        AppBundle\Entity\User: plaintext
+
+    role_hierarchy:
+        ROLE_INSTRUCTOR:   ROLE_USER
+        ROLE_ADMIN:       [ROLE_USER, ROLE_INSTRUCTOR]
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_INSTRUCTOR, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
         in_memory:
             memory:
                 users:
-                    ryan:
-                        password: ryanpass
-                        roles: 'ROLE_USER'
                     admin:
                         password: hoeruh
                         roles: 'ROLE_ADMIN'
-#        db_provider:
-#            entity:
-#                class: AppBundle:User
+        users:
+            entity:
+                class: AppBundle:User
+                property: username
 
     firewalls:
-        # disables authenticatio0n for assets and the profiler, adapt it according to your needs
+        # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-#        admin:
-#            anonymous: ~
-#            http_basic: ~
-        main:
+        admin:
+            pattern: ^/admin
             anonymous: ~
-#            provider: db_provider
+#            provider: users
+            form_login:
+                login_path: /admin/login
+                check_path: /admin/login
+            logout:
+                path:   /admin/logout
+                target: /admin/login
+        user_secured:
+            pattern: ^/
+            anonymous: ~
+            provider: users
             form_login:
                 login_path: login
                 check_path: login
@@ -45,4 +56,7 @@ security:
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/admin/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/member, roles: ROLE_USER }
+        - { path: ^/instructor, roles: ROLE_INSTRUCTOR }
         - { path: ^/admin, roles: ROLE_ADMIN }

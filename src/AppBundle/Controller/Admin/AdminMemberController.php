@@ -1,8 +1,9 @@
 <?php
 
-namespace AppBundle\Controller;
+namespace AppBundle\Controller\Admin;
 
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,6 +16,7 @@ class AdminMemberController extends Controller
 
     /**
      * @Route("/admin/member/list", name="member-list")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function showMembersAction(Request $request)
     {
@@ -25,6 +27,7 @@ class AdminMemberController extends Controller
 
     /**
      * @Route("/admin/member/create", name="member-create")
+     * @Security("has_role('ROLE_ADMIN')")
      */
     public function createMemberAction(Request $request)
     {

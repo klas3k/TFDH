@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block nav %}
+    {% include 'includes/navBar.html.twig' %}
+{% endblock %}
+
+{% block content %}
+    <a class="btn btn-warning" href="{{ path('lesson-create') }}">Nieuwe lesson</a>
+    <div style="margin-top: 10px    ">
+        <table class="table table-bordered">
+            <thead>
+            <td>Id</td>
+            <td>Tijd</td>
+            <td>Datum</td>
+            <td>Locatie</td>
+            <td>Max Personen</td>
+            <td>Acties</td>
+            </thead>
+            <tbody>
+            {% for lesson in lessons %}
+                <tr>
+                    <td><a href="{{ path('lesson-view', {'id':lesson.id}) }}">{{ lesson.id }}</a></td>
+                    <td>{{ lesson.time|date('H:i') }}</td>
+                    <td>{{ lesson.date|date('D M Y') }}</td>
+                    <td>{{ lesson.location }}</td>
+                    <td>{{ lesson.maxPersons }}</td>
+                    <td>
+                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                            <a href="{{ path('lesson-edit', {'id':lesson.id}) }}" class="btn btn-secondary">Bewerken</a>
+                            <a href="{{ path('lesson-remove', {'id':lesson.id}) }}" class="btn btn-secondary">Verwijderen</a>
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -2,15 +2,16 @@
 
 namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity()
  * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\DiscriminatorColumn(name="discr", type="string")
  * @ORM\DiscriminatorMap({"user" = "User", "member" = "Member", "instructor" = "Instructor"})
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-Abstract class User
+Abstract class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -116,17 +117,17 @@ Abstract class User
     /**
      * @return mixed
      */
-    public function getEmaill()
+    public function getEmail()
     {
-        return $this->emaill;
+        return $this->email;
     }
 
     /**
-     * @param mixed $emaill
+     * @param mixed $email
      */
-    public function setEmaill($emaill)
+    public function setEmail($email)
     {
-        $this->emaill = $emaill;
+        $this->email = $email;
     }
 
     /**
@@ -207,6 +208,12 @@ Abstract class User
     public function setGender($gender)
     {
         $this->gender = $gender;
+
+        if ($this->gender == 'M') {
+            $this->setPrefix('Meneer');
+        } elseif ($this->gender == 'V') {
+            $this->setPrefix('Mevrouw');
+        }
     }
 
     /**
@@ -223,6 +230,16 @@ Abstract class User
     public function setRoles($roles)
     {
         $this->roles = $roles;
+    }
+
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function eraseCredentials()
+    {
     }
 
     public function __toString()

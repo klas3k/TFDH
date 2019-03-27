@@ -2,21 +2,25 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Instructor;
+use AppBundle\Entity\User;
 use AppBundle\Form\Processor\MemberProcessor;
-use AppBundle\Form\Type\LogInType;
 use AppBundle\Form\Type\MemberType;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
-class QuestController extends Controller
+class GuestController extends Controller
 {
     private $memberProcessor;
+    private $em;
 
-    public function __construct(MemberProcessor $memberProcessor)
+    public function __construct(MemberProcessor $memberProcessor, EntityManagerInterface $em)
     {
         $this->memberProcessor = $memberProcessor;
+        $this->em = $em;
     }
 
     /**
@@ -34,6 +38,10 @@ class QuestController extends Controller
      */
     public function registerAction(Request $request)
     {
+        if ($this->getUser()) {
+            return $this->redirectToRoute('homepage');
+        }
+
         $form = $this->createForm(MemberType::class);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -51,17 +59,13 @@ class QuestController extends Controller
      */
     public function loginAction(AuthenticationUtils $authenticationUtils)
     {
-        // get the login error if there is one
-        $error = $authenticationUtils->getLastAuthenticationError();
-
-        // last username entered by the user
-        $lastUsername = $authenticationUtils->getLastUsername();
-
-        dump($error);
+        if ($this->getUser()) {
+            return $this->redirectToRoute('homepage');
+        }
 
         return $this->render('guest/login.html.twig', [
-            'last_username' => $lastUsername,
-            'error'         => $error,
+            'last_username' => $authenticationUtils->getLastUsername(),
+            'error'         => $authenticationUtils->getLastAuthenticationError(),
         ]);
     }
 }
