@@ -22,7 +22,6 @@ class TrainingController extends Controller
         $trainings = $em->getRepository(Training::class)->findAll();
 
         return $this->render("training/index.html.twig", [
-            "name" => "John Doe",
             "trainings" => $trainings,
         ]);
     }
@@ -32,6 +31,7 @@ class TrainingController extends Controller
      */
     public function createTrainingAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_INSTRUCTOR');
         $form = $this->createForm(TrainingType::class);
         $form->handleRequest($request);
 
@@ -57,6 +57,7 @@ class TrainingController extends Controller
      */
     public function editTrainingAction(Request $request, Training $training)
     {
+        $this->denyAccessUnlessGranted('ROLE_INSTRUCTOR');
         $form = $this->createForm(TrainingType::class, $training);
         $form->handleRequest($request);
 
@@ -72,7 +73,6 @@ class TrainingController extends Controller
         }
 
         return $this->render("default/form.html.twig", [
-            "name"   => "John Doe",
             "form"   => $form->createView(),
         ]);
     }
@@ -82,6 +82,7 @@ class TrainingController extends Controller
      */
     public function deleteTrainingAction(Request $request, Training $training)
     {
+        $this->denyAccessUnlessGranted('ROLE_INSTRUCTOR');
         $em = $this->getDoctrine()->getManager();
         $em->remove($training);
         $em->flush();

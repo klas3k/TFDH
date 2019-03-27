@@ -25,9 +25,7 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        return $this->render("default/home.html.twig", [
-            "name" => "John Doe",
-        ]);
+        return $this->render("default/home.html.twig");
     }
 
     /**
@@ -53,7 +51,6 @@ class DefaultController extends Controller
         }
 
         return $this->render("default/form.html.twig", [
-            "name" => "John Doe",
             "form"   => $form->createView(),
         ]);
     }

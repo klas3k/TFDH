@@ -1,20 +1,24 @@
 {% extends "base.html.twig" %}
 
 {% block content %}
-	<a href="{{ path("training_create") }}" class="mb-3 btn btn-success">Training aanmaken</a>
-	<div class="card-columns">
-		{% for training in trainings %}
-			<div class="card">
-				<h5 class="card-header">{{ training.name }}</h5>
-				<div class="card-body">
-					<p class="card-text">{{ training.description }}</p>
-					<a href="#" class="btn btn-primary">Bekijk lessen</a>
-				</div>
-				<div class="card-footer">
-					<a href="{{ path("training_update", {"name": training}) }}" class="btn btn-success">Edit</a>
-					<a href="{{ path("training_delete", {"name": training}) }}" class="btn btn-danger">Delete</a>
-				</div>
-			</div>
-		{% endfor %}
-	</div>
+    {% if is_granted('ROLE_INSTRUCTOR') %}
+    <a href="{{ path("training_create") }}" class="mb-3 btn btn-success">Training aanmaken</a>
+    {% endif %}
+    <div class="card-columns">
+        {% for training in trainings %}
+            <div class="card">
+                <h5 class="card-header">{{ training.name }}</h5>
+                <div class="card-body">
+                    <p class="card-text">{{ training.description }}</p>
+                    <a href="#" class="btn btn-primary">Bekijk lessen</a>
+                </div>
+                {% if is_granted('ROLE_INSTRUCTOR') %}
+                <div class="card-footer">
+                    <a href="{{ path("training_update", {"name": training}) }}" class="btn btn-success">Edit</a>
+                    <a href="{{ path("training_delete", {"name": training}) }}" class="btn btn-danger">Delete</a>
+                </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
 {% endblock %}
