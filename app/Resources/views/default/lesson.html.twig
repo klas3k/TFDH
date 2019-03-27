@@ -1,0 +1,25 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    {% if is_granted('ROLE_INSTRUCTOR') %}
+    <a href="{{ path('lesson_create') }}" class="mb-3 btn btn-success">Les aanmaken</a>
+    {% endif %}
+    <div class="d-flex flex-wrap justify-content-between">
+        {% for lesson in lessons %}
+            <div class="card mb-4">
+                <h5 class="card-header">{{ lesson.training.name }}</h5>
+                <div class="card-body">
+                    <span class="card-text">{{ lesson.location }}</span>
+                    <br>
+                    <span class="card-text">{{ lesson.time|date("d/m/Y") }}</span>
+                </div>
+                {% if is_granted('ROLE_INSTRUCTOR') %}
+                <div class="card-footer">
+                    <a href="{{ path('lesson_update', {'id': lesson}) }}" class="btn btn-success">Edit</a>
+                    <a href="{{ path('lesson_delete', {'id': lesson}) }}" class="btn btn-danger">Delete</a>
+                </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

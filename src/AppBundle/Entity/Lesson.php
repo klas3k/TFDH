@@ -203,5 +203,10 @@ class Lesson
     {
         return $this->registrations;
     }
+
+    public function __toString()
+    {
+        return (string)$this->id;
+    }
 }
 

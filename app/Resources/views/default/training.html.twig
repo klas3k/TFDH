@@ -2,7 +2,7 @@
 
 {% block content %}
     {% if is_granted('ROLE_INSTRUCTOR') %}
-    <a href="{{ path("training_create") }}" class="mb-3 btn btn-success">Training aanmaken</a>
+    <a href="{{ path('training_create') }}" class="mb-3 btn btn-success">Training aanmaken</a>
     {% endif %}
     <div class="card-columns">
         {% for training in trainings %}
@@ -14,8 +14,8 @@
                 </div>
                 {% if is_granted('ROLE_INSTRUCTOR') %}
                 <div class="card-footer">
-                    <a href="{{ path("training_update", {"name": training}) }}" class="btn btn-success">Edit</a>
-                    <a href="{{ path("training_delete", {"name": training}) }}" class="btn btn-danger">Delete</a>
+                    <a href="{{ path('training_update', {'name': training}) }}" class="btn btn-success">Edit</a>
+                    <a href="{{ path('training_delete', {'name': training}) }}" class="btn btn-danger">Delete</a>
                 </div>
                 {% endif %}
             </div>

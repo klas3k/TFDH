@@ -21,7 +21,7 @@ class TrainingController extends Controller
         $em = $this->getDoctrine()->getManager();
         $trainings = $em->getRepository(Training::class)->findAll();
 
-        return $this->render("training/index.html.twig", [
+        return $this->render("default/training.html.twig", [
             "trainings" => $trainings,
         ]);
     }
@@ -47,7 +47,6 @@ class TrainingController extends Controller
         }
 
         return $this->render("default/form.html.twig", [
-            "name"   => "John Doe",
             "form"   => $form->createView(),
         ]);
     }
@@ -87,7 +86,7 @@ class TrainingController extends Controller
         $em->remove($training);
         $em->flush();
 
-        $this->addFlash("success", "Training verwijdert!");
+        $this->addFlash("success", "Training verwijderd!");
 
         return $this->redirectToRoute("training_index", $request->query->all());
     }

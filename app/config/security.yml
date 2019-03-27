@@ -39,4 +39,5 @@ security:
         - { path: ^/instructor, roles: ROLE_INSTRUCTOR }
 
     role_hierarchy:
+        ROLE_INSTRUCTOR: ROLE_MEMBER
         ROLE_ADMIN: ROLE_INSTRUCTOR
