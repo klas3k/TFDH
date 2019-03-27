@@ -6,52 +6,52 @@
         {% block stylesheets %}
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         {% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="icon" type="image/x-icon" href="{{ asset("favicon.ico") }}" />
     </head>
     <body>
         <header class="row">
             <div class="col-2 d-flex justify-content-center align-items-center">
-                 <a class="nav-link" href="{{ path('homepage') }}">
-                    <img class="w-100" src="{{ asset('images/tfdh_logo.png') }}">
+                 <a class="nav-link" href="{{ path("homepage") }}">
+                    <img class="w-100" src="{{ asset("images/tfdh_logo.png") }}">
                  </a>
             </div>
             <h1 class="col-8 d-flex justify-content-center align-items-center">Training Factory Den Haag</h1>
             <div class="col-2 d-flex justify-content-around align-items-center flex-column">
-                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                {% if is_granted("IS_AUTHENTICATED_FULLY") %}
                     {{ app.user.username }}
-                    <a href="{{ path('logout') }}" class="btn btn-outline-primary">Uitloggen</a>
+                    <a href="{{ path("logout") }}" class="btn btn-outline-primary">Uitloggen</a>
                 {% else %}
-                    <button class="btn btn-outline-primary">Inloggen</button>
+                    <a href="{{ path("login") }}" class="btn btn-outline-primary">Inloggen</a>
                 {% endif %}
             </div>
         </header>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <ul class="navbar-nav">
-                {% if is_granted('ROLE_INSTRUCTOR') %}
+                {% if is_granted("ROLE_INSTRUCTOR") %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('homepage') }}">Home</a>
+                    <a class="nav-link" href="{{ path("homepage") }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('lesson_create') }}">Les aanmaken</a>
+                    <a class="nav-link" href="{{ path("lesson_create") }}">Les aanmaken</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('training_index') }}">Trainingen weergeven</a>
+                    <a class="nav-link" href="{{ path("training_index") }}">Trainingen weergeven</a>
                 </li>
-                {% elseif is_granted('ROLE_MEMBER') %}
+                {% elseif is_granted("ROLE_MEMBER") %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('homepage') }}">Home</a>
+                    <a class="nav-link" href="{{ path("homepage") }}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('training_index') }}">Trainingen weergeven</a>
+                    <a class="nav-link" href="{{ path("training_index") }}">Trainingen weergeven</a>
                 </li>
                 {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('homepage') }}">Home</a>
+                    <a class="nav-link" href="{{ path("homepage") }}">Home</a>
                 </li>
                 {% endif %}
             </ul>
         </nav>
-        {% for message in app.flashes('success') %}
+        {% for message in app.flashes("success") %}
             <div class="alert alert-success">
                 {{ message }}
             </div>

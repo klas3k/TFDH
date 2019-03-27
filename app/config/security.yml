@@ -28,10 +28,15 @@ security:
 
         main:
             anonymous: ~
-            http_basic: ~
+            form_login:
+                login_path: login
+                check_path: login
             logout:
-                path:   /logout
+                path: /logout
                 target: /
 
     access_control:
         - { path: ^/instructor, roles: ROLE_INSTRUCTOR }
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_INSTRUCTOR
