@@ -45,8 +45,12 @@ class GuestController extends Controller
         $form = $this->createForm(MemberType::class);
 
         $this->memberProcessor->processRegister($form);
-        dump($form);
+
         if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash(
+                'succes',
+                'Uw profiel is aangemaakt, log nu in!'
+            );
             return $this->redirectToRoute('login');
         }
 
