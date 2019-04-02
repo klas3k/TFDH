@@ -125,5 +125,21 @@ class Member extends Person
     {
         return $this->city;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getRoles()
+    {
+        return ["ROLE_MEMBER"];
+    }
+
+    /**
+     * @param mixed $roles
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+    }
 }
 

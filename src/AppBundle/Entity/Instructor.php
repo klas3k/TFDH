@@ -94,5 +94,20 @@ class Instructor extends Person
     {
         return $this->salary;
     }
-}
 
+    /**
+     * @return mixed
+     */
+    public function getRoles()
+    {
+        return ["ROLE_INSTRUCTOR"];
+    }
+
+    /**
+     * @param mixed $roles
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
+    }
+}

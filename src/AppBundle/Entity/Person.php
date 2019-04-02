@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Person
@@ -12,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorMap({"person" = "Person", "instructor" = "Instructor", "member" = "Member"})
  */
-class Person
+class Person implements UserInterface
 {
     /**
      * @var int
@@ -79,6 +80,7 @@ class Person
      */
     private $email;
 
+    private $roles = [];
 
     /**
      * Get id
@@ -301,6 +303,32 @@ class Person
     public function getEmail()
     {
         return $this->email;
+    }
+
+    public function getSalt()
+    {
+        return null;
+    }
+
+    public function eraseCredentials()
+    {
+        // Needed for UserInterface
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    /**
+     * @param mixed $roles
+     */
+    public function setRoles($roles)
+    {
+        $this->roles = $roles;
     }
 
     public function __toString()
