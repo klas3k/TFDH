@@ -44,9 +44,10 @@ class GuestController extends Controller
 
         $form = $this->createForm(MemberType::class);
 
+        $this->memberProcessor->processRegister($form);
+        dump($form);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->memberProcessor->processRegister($form);
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('login');
         }
 
         return $this->render('guest/register.html.twig', [

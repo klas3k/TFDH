@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+    {{ form_start(form) }}
     <div class="row">
         <div class="col-sm-6">
             <div class="form-group">
@@ -24,8 +25,8 @@
                 {{ form_widget(form.gender) }}
             </div>
             <div class="form-group">
-                {{ form_label(form.adress) }}
-                {{ form_widget(form.adress) }}
+                {{ form_label(form.street) }}
+                {{ form_widget(form.street) }}
             </div>
             <div class="form-group">
                 {{ form_label(form.postalcode) }}
@@ -33,7 +34,6 @@
             </div>
         </div>
         <div class="col-sm-6">
-
             <div class="form-group">
                 {{ form_label(form.email) }}
                 {{ form_widget(form.email) }}
@@ -43,8 +43,9 @@
                 {{ form_widget(form.password) }}
             </div>
             <div class="form-group">
-                {{ form_widget(form.register) }}
+                {{ form_row(form.register) }}
             </div>
         </div>
     </div>
+    {{ form_end(form) }}
 {% endblock %}
