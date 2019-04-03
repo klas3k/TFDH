@@ -1,0 +1,30 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <a href="{{ path('person_create') }}" class="mb-3 btn btn-success">Gebruiker aanmaken</a>
+    <div class="d-flex flex-wrap justify-content-between">
+        <table class="table">
+        <tr>
+            <th>Naam</th>
+            <th>Gebruikersnaam</th>
+            <th>Email</th>
+            <th>Rol</th>
+        </tr>
+        {% for person in people %}
+        <br>
+        <tr>
+            <td>{{ person.firstName }} {{ person.prefix }} {{ person.lastName }}</td>
+            <td>{{ person.username }}</td>
+            <td>{{ person.email }}</td>
+            <td>
+            {% if person.getRoles()[0] == "ROLE_MEMBER" %}
+            Member
+            {% else %}
+            Instructeur
+            {% endif %}
+            </td>
+        <tr>
+        {% endfor %}
+        </table>
+    </div>
+{% endblock %}

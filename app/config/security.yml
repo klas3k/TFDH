@@ -46,6 +46,7 @@ security:
 
     access_control:
         - { path: ^/instructor, roles: ROLE_INSTRUCTOR }
+        - { path: ^/person, roles: ROLE_ADMIN }
 
     role_hierarchy:
         ROLE_INSTRUCTOR: ROLE_MEMBER
