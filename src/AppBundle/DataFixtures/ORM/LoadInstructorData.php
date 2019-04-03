@@ -4,7 +4,6 @@ namespace AppBundle\DataFixtures\ORM;
 
 
 use AppBundle\Entity\Instructor;
-use AppBundle\Entity\Member;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\Persistence\ObjectManager;
 

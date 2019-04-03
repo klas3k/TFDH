@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Instructor;
+use AppBundle\Entity\Training;
 use AppBundle\Entity\User;
 use AppBundle\Form\Processor\MemberProcessor;
 use AppBundle\Form\Type\MemberType;
@@ -28,7 +29,10 @@ class GuestController extends Controller
      */
     public function indexAction(Request $request)
     {
+        dump($this->em->getRepository(User::class)->findAll());
+
         return $this->render('default/index.html.twig', [
+            'trainingen' => $this->em->getRepository(Training::class)->findAll(),
             'user' => $this->getUser(),
         ]);
     }
@@ -42,7 +46,7 @@ class GuestController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
-        $form = $this->createForm(MemberType::class);
+        $form = $this->createForm(MemberType::class, null,['register' => true]);
 
         $this->memberProcessor->processRegister($form);
 

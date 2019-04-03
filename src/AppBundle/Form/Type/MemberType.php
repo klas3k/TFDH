@@ -23,6 +23,7 @@ class MemberType extends AbstractType
     {
         $resolver->setDefaults([
             'readOnly' => false,
+            'register' => false,
             'data_class' => 'AppBundle\Entity\Member',
         ]);
     }
@@ -40,10 +41,11 @@ class MemberType extends AbstractType
                 'label' => 'Achternaam',
                 'disabled' => $options['readOnly']
             ])
-            ->add('dateofbirth', DateType::class, [
+            ->add('dateofbirth', TextType::class, [
                 'required' => true,
                 'label' => 'Geboortedatum',
-                'disabled' => $options['readOnly']
+                'disabled' => $options['readOnly'],
+                'attr' => ['class' => 'datepicker']
             ])
             ->add('gender', ChoiceType::class, [
                 'choices' => [
@@ -78,7 +80,7 @@ class MemberType extends AbstractType
                 'disabled' => $options['readOnly']
             ])
         ;
-        if (!$options['readOnly']) {
+        if (!$options['readOnly'] || $options['register']) {
             $builder
                 ->add('register', SubmitType::class, [
                 'label' => 'Registeren',

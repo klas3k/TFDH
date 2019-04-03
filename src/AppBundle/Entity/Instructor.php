@@ -9,13 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Instructor extends User
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
      * @ORM\Column(type="datetime")
      */
     private $hiringData;
@@ -29,22 +22,6 @@ class Instructor extends User
      * @ORM\OneToMany(targetEntity="Lesson", mappedBy="instuctor", cascade={"persist", "remove"})
      */
     private $lesson;
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
 
     /**
      * @return mixed

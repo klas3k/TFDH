@@ -9,13 +9,6 @@ use Doctrine\ORM\Mapping as ORM;
 class Member extends User
 {
     /**
-     * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
      * @ORM\Column(type="string")
      */
     private $street;
@@ -34,22 +27,6 @@ class Member extends User
      * @ORM\OneToMany(targetEntity="Registration", mappedBy="member", cascade={"persist", "remove"})
      */
     private $registration;
-
-    /**
-     * @return mixed
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * @param mixed $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
-    }
 
     /**
      * @return mixed
