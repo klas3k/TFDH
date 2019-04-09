@@ -29,8 +29,6 @@ class GuestController extends Controller
      */
     public function indexAction(Request $request)
     {
-        dump($this->em->getRepository(User::class)->findAll());
-
         return $this->render('default/index.html.twig', [
             'trainingen' => $this->em->getRepository(Training::class)->findAll(),
             'user' => $this->getUser(),

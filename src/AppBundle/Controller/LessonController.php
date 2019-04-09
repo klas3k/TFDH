@@ -51,7 +51,7 @@ class LessonController extends Controller
         $this->em->persist($booking);
         $this->em->flush();
 
-        return $this->redirectToRoute('trainingDetail', ['id'=>$id]);
+        return $this->redirectToRoute('trainingDetail', ['id'=>$lesson->getTrainings()->getId()]);
     }
 
     /**
