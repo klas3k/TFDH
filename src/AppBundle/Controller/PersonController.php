@@ -5,8 +5,12 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 use AppBundle\Form\PersonType;
 use AppBundle\Entity\Person;
+use AppBundle\Entity\Member;
+use AppBundle\Entity\Lesson;
+use AppBundle\Entity\Registration;
 
 /**
  * @Route("/person")
@@ -18,6 +22,8 @@ class PersonController extends Controller
      */
     public function indexAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $em = $this->getDoctrine()->getManager();
         $people = $em->getRepository(Person::class)->findBy([], ["firstName" => "asc"]);
 
@@ -31,6 +37,8 @@ class PersonController extends Controller
      */
     public function createPersonAction(Request $request)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $form = $this->createForm(PersonType::class);
         $form->handleRequest($request);
 
@@ -55,6 +63,8 @@ class PersonController extends Controller
      */
     public function editPersonAction(Request $request, Person $person)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $form = $this->createForm(PersonType::class, $person);
         $form->handleRequest($request);
 
@@ -79,6 +89,8 @@ class PersonController extends Controller
      */
     public function deletePersonAction(Request $request, Person $person)
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
+
         $em = $this->getDoctrine()->getManager();
         $em->remove($person);
         $em->flush();
@@ -86,5 +98,30 @@ class PersonController extends Controller
         $this->addFlash("success", "Gebruiker verwijderd!");
 
         return $this->redirectToRoute("person_index", $request->query->all());
+    }
+
+    /**
+     * @Route("/lesson/{id}", name="person_lessonApply")
+     */
+    public function applyLessonAction(Request $request, UserInterface $user, Lesson $lesson)
+    {
+        $this->denyAccessUnlessGranted('ROLE_MEMBER');
+
+        $em = $this->getDoctrine()->getManager();
+        if(count($em->getRepository(Registration::class)->findBy(['member' => $user, 'lesson' => $lesson])) > 0) {
+            $this->addFlash("danger", "Reeds ingeschreven voor deze les!");
+            return $this->redirectToRoute("lesson_index", $request->query->all());
+        }
+
+        $registration = new Registration();
+        $registration->setLesson($lesson);
+        $registration->setMember($user);
+
+        $em->persist($registration);
+        $em->flush();
+
+        $this->addFlash("success", "Ingeschreven voor les!");
+
+        return $this->redirectToRoute("lesson_index", $request->query->all());
     }
 }

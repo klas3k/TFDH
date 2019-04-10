@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use AppBundle\Form\LessonType;
 use AppBundle\Entity\Lesson;
+use AppBundle\Entity\Training;
 
 /**
  * @Route("/lesson")
@@ -20,6 +21,19 @@ class LessonController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
         $lessons = $em->getRepository(Lesson::class)->findBy([], ["training" => "asc", "time" => "asc"]);
+
+        return $this->render("default/lesson.html.twig", [
+            "lessons" => $lessons,
+        ]);
+    }
+
+    /**
+     * @Route("/{name}", name="lessonByTraining_index")
+     */
+    public function trainingAction(Request $request, Training $training)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $lessons = $em->getRepository(Lesson::class)->findBy(["training" => $training], ["time" => "asc"]);
 
         return $this->render("default/lesson.html.twig", [
             "lessons" => $lessons,

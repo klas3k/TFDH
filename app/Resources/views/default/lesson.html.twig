@@ -9,9 +9,14 @@
             <div class="card mb-4">
                 <h5 class="card-header">{{ lesson.training.name }}</h5>
                 <div class="card-body">
-                    <span class="card-text">{{ lesson.location }}</span>
-                    <br>
-                    <span class="card-text">{{ lesson.time|date("d/m/Y") }}</span>
+                    <p>
+                        <span class="card-text">{{ lesson.location }}</span>
+                        <br>
+                        <span class="card-text">{{ lesson.time|date("d/m/Y") }}</span>
+                    </p>
+                    {% if is_granted('ROLE_MEMBER') %}
+                    <a href="{{ path('person_lessonApply', {'id': lesson}) }}" class="btn btn-primary">Schrijf in</a>
+                    {% endif %}
                 </div>
                 {% if is_granted('ROLE_INSTRUCTOR') %}
                 <div class="card-footer">

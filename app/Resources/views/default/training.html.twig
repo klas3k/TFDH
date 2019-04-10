@@ -10,7 +10,7 @@
                 <h5 class="card-header">{{ training.name }}</h5>
                 <div class="card-body">
                     <p class="card-text">{{ training.description }}</p>
-                    <a href="#" class="btn btn-primary">Bekijk lessen</a>
+                    <a href="{{ path('lessonByTraining_index', {'name': training}) }}" class="btn btn-primary">Bekijk lessen</a>
                 </div>
                 {% if is_granted('ROLE_INSTRUCTOR') %}
                 <div class="card-footer">
